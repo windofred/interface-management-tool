@@ -3,6 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.migu.spms.dao.InterfaceMapper">
 
+    <resultMap id="interfaceResultMap" type="com.migu.spms.entity.InterfaceDO">
+        <id column="interface_id" property="interfaceId" />
+        <result column="interface_name" property="interfaceName" />
+        <result column="interface_uri" property="interfaceUri" />
+        <result column="latest_updater" property="latestUpdater" />
+        <result column="update_date" property="updateDate" />
+    </resultMap>
+    
+    <select id="selectById" resultMap="interfaceResultMap">
+        SELECT * FROM spms_interface WHERE interface_id=#{interfaceId}
+    </select>
 
+    <select id="getAll" resultMap="interfaceResultMap">
+        SELECT * FROM spms_interface
+    </select>
 
 </mapper>

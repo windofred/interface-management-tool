@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,14 +10,9 @@
         pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
 
-    <!-- web路径：
-    不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题。
-    以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
-            http://localhost:3306/crud
-     -->
-    <script type="text/javascript" src="${APP_PATH}/static/js/jquery-1.12.4.min.js"></script>
-    <link href="${APP_PATH}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="${APP_PATH}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery-1.12.4.min.js"></script>
+    <script src="static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -28,7 +22,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">员工修改</h4>
+                <h4 class="modal-title">接口修改</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -135,7 +129,7 @@
     <!-- 标题 -->
     <div class="row">
         <div class="col-md-12">
-            <h1>SSM-CRUD</h1>
+            <h1>Interface-management-tool</h1>
         </div>
     </div>
     <!-- 按钮 -->
@@ -155,10 +149,10 @@
                         <input type="checkbox" id="check_all"/>
                     </th>
                     <th>#</th>
-                    <th>empName</th>
-                    <th>gender</th>
-                    <th>email</th>
-                    <th>deptName</th>
+                    <th>interfaceName</th>
+                    <th>interfaceUri</th>
+                    <th>latestUpdater</th>
+                    <th>updateDate</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -191,7 +185,7 @@
 
     function to_page(pn){
         $.ajax({
-            url:"${APP_PATH}/emps",
+            url:"/emps",
             data:"pn="+pn,
             type:"GET",
             success:function(result){
@@ -341,7 +335,7 @@
         //清空之前下拉列表的值
         $(ele).empty();
         $.ajax({
-            url:"${APP_PATH}/depts",
+            url:"/depts",
             type:"GET",
             success:function(result){
                 //{"code":100,"msg":"处理成功！",
@@ -406,7 +400,7 @@
         //发送ajax请求校验用户名是否可用
         var empName = this.value;
         $.ajax({
-            url:"${APP_PATH}/checkuser",
+            url:"/checkuser",
             data:"empName="+empName,
             type:"POST",
             success:function(result){
@@ -435,7 +429,7 @@
 
         //2、发送ajax请求保存员工
         $.ajax({
-            url:"${APP_PATH}/emp",
+            url:"/emp",
             type:"POST",
             data:$("#empAddModal form").serialize(),
             success:function(result){
@@ -486,7 +480,7 @@
 
     function getEmp(id){
         $.ajax({
-            url:"${APP_PATH}/emp/"+id,
+            url:"/emp/"+id,
             type:"GET",
             success:function(result){
                 //console.log(result);
@@ -514,7 +508,7 @@
 
         //2、发送ajax请求保存更新的员工数据
         $.ajax({
-            url:"${APP_PATH}/emp/"+$(this).attr("edit-id"),
+            url:"/emp/"+$(this).attr("edit-id"),
             type:"PUT",
             data:$("#empUpdateModal form").serialize(),
             success:function(result){
@@ -536,7 +530,7 @@
         if(confirm("确认删除【"+empName+"】吗？")){
             //确认，发送ajax请求删除即可
             $.ajax({
-                url:"${APP_PATH}/emp/"+empId,
+                url:"/emp/"+empId,
                 type:"DELETE",
                 success:function(result){
                     alert(result.msg);
@@ -580,7 +574,7 @@
         if(confirm("确认删除【"+empNames+"】吗？")){
             //发送ajax请求删除
             $.ajax({
-                url:"${APP_PATH}/emp/"+del_idstr,
+                url:"/emp/"+del_idstr,
                 type:"DELETE",
                 success:function(result){
                     alert(result.msg);
