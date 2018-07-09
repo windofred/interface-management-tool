@@ -1,17 +1,29 @@
 package com.migu.spms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by sala on 2018/7/8.
  */
-public class InterfaceDO {
+public class InterfaceDO implements Serializable {
 
     private Integer interfaceId;
     private String interfaceName;
-    private String interfaceUri;
+    private String requestMethod;
+    private String requestPath;
     private String latestUpdater;
-    private Date updateDate;
+    private Date createTime;
+    private String requestParameter;
+    private String responseParameter;
+
+    public String getRequestPath() {
+        return requestPath;
+    }
+
+    public void setRequestPath(String requestPath) {
+        this.requestPath = requestPath;
+    }
 
     public Integer getInterfaceId() {
         return interfaceId;
@@ -29,12 +41,12 @@ public class InterfaceDO {
         this.interfaceName = interfaceName;
     }
 
-    public String getInterfaceUri() {
-        return interfaceUri;
+    public String getRequestMethod() {
+        return requestMethod;
     }
 
-    public void setInterfaceUri(String interfaceUri) {
-        this.interfaceUri = interfaceUri;
+    public void setRequestMethod(String requestMethod) {
+        this.requestMethod = requestMethod;
     }
 
     public String getLatestUpdater() {
@@ -45,11 +57,40 @@ public class InterfaceDO {
         this.latestUpdater = latestUpdater;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRequestParameter() {
+        return requestParameter;
+    }
+
+    public void setRequestParameter(String requestParameter) {
+        this.requestParameter = requestParameter;
+    }
+
+    public String getResponseParameter() {
+        return responseParameter;
+    }
+
+    public void setResponseParameter(String responseParameter) {
+        this.responseParameter = responseParameter;
+    }
+
+    @Override
+    public String toString() {
+        return "InterfaceDO{" +
+                "interfaceId=" + interfaceId +
+                ", interfaceName='" + interfaceName + '\'' +
+                ", requestMethod='" + requestMethod + '\'' +
+                ", latestUpdater='" + latestUpdater + '\'' +
+                ", createTime=" + createTime +
+                ", requestParameter='" + requestParameter + '\'' +
+                ", responseParameter='" + responseParameter + '\'' +
+                '}';
     }
 }

@@ -4,26 +4,23 @@ import com.migu.spms.dao.InterfaceMapper;
 import com.migu.spms.entity.InterfaceDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by sala on 2018/7/8.
  */
-@Service
-public class InterfaceService {
+public interface InterfaceService {
 
-    @Autowired
-    private InterfaceMapper interfaceMapper;
+    List<InterfaceDO> getAll();
 
-    public List<InterfaceDO> getAll() {
-        List<InterfaceDO> list = interfaceMapper.getAll();
-        return list;
-    }
+    InterfaceDO selectById(Integer interfaceId);
 
-    public InterfaceDO selectById(Integer interfaceId) {
-        InterfaceDO interfaceDO = interfaceMapper.selectById(interfaceId);
-        return interfaceDO;
-    }
+    int deleteById(Integer interfaceId);
+
+    int insertInterface(InterfaceDO record);
+
+    int updateById(InterfaceDO interfaceDO);
 
 }

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>员工列表</title>
+    <title>接口管理</title>
 
     <%
         pageContext.setAttribute("APP_PATH", request.getContextPath());
@@ -16,8 +16,9 @@
 
 </head>
 <body>
-<!-- 员工修改的模态框 -->
-<div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+<!-- 接口修改的模态框 -->
+<div class="modal fade" id="interfaceUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -26,43 +27,69 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">empName</label>
+                        <label class="col-sm-2 control-label">接口名称</label>
                         <div class="col-sm-10">
-                            <p class="form-control-static" id="empName_update_static"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">email</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="email" class="form-control" id="email_update_input" placeholder="email@atguigu.com">
+                            <%--<p class="form-control-static" id="interfaceName_update_static"></p>--%>
+                            <input type="text" name="interfaceName" class="form-control" id="interfaceName_update_input" placeholder="">
                             <span class="help-block"></span>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">gender</label>
+                        <label class="col-sm-2 control-label">请求方式</label>
                         <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" name="gender" id="gender1_update_input" value="M" checked="checked"> 男
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="gender" id="gender2_update_input" value="F"> 女
-                            </label>
+                            <input type="text" name="requestMethod" class="form-control" id="requestMethod_update_input" placeholder="">
+                            <span class="help-block"></span>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">deptName</label>
-                        <div class="col-sm-4">
-                            <!-- 部门提交部门id即可 -->
-                            <select class="form-control" name="dId">
-                            </select>
+                        <label class="col-sm-2 control-label">请求路径</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="requestPath" class="form-control" id="requestPath_update_input" placeholder="">
+                            <span class="help-block"></span>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">更新者</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="latestUpdater" class="form-control" id="latestUpdater_update_input" placeholder="">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">创建时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="createTime" class="form-control" id="createTime_update_input" placeholder="">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">请求参数</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="requestParameter" class="form-control" id="requestParameter_update_input" placeholder="">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">响应参数</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="responseParameter" class="form-control" id="responseParameter_update_input" placeholder="">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="emp_update_btn">更新</button>
+                <button type="button" class="btn btn-primary" id="interface_update_btn">更新</button>
             </div>
         </div>
     </div>
@@ -71,47 +98,73 @@
 
 
 <!-- 员工添加的模态框 -->
-<div class="modal fade" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="interfaceAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">员工添加</h4>
+                <h4 class="modal-title" id="myModalLabel">接口添加</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">empName</label>
+                        <label class="col-sm-2 control-label">interfaceName</label>
                         <div class="col-sm-10">
-                            <input type="text" name="empName" class="form-control" id="empName_add_input" placeholder="empName">
+                            <input type="text" name="interfaceName" class="form-control" id="empName_add_input" placeholder="interfaceName">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">email</label>
+                        <label class="col-sm-2 control-label">requestMethod</label>
                         <div class="col-sm-10">
-                            <input type="text" name="email" class="form-control" id="email_add_input" placeholder="email@atguigu.com">
+                            <input type="text" name="requestMethod" class="form-control" placeholder="GET">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">gender</label>
+                        <label class="col-sm-2 control-label">requestPath</label>
                         <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" name="gender" id="gender1_add_input" value="M" checked="checked"> 男
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="gender" id="gender2_add_input" value="F"> 女
-                            </label>
+                            <input type="text" name="requestPath" class="form-control" placeholder="">
+                            <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">deptName</label>
+                        <label class="col-sm-2 control-label">latestUpdater</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="latestUpdater" class="form-control" placeholder="">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">createTime</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="createTime" class="form-control" placeholder="">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">requestParameter</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="requestParamter" class="form-control"  placeholder="">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">responseParameter</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="responseParameter" class="form-control" placeholder="">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <%--<label class="col-sm-2 control-label">deptName</label>
                         <div class="col-sm-4">
                             <!-- 部门提交部门id即可 -->
                             <select class="form-control" name="dId">
                             </select>
-                        </div>
+                        </div>--%>
                     </div>
                 </form>
             </div>
@@ -135,24 +188,27 @@
     <!-- 按钮 -->
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
-            <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
+            <button class="btn btn-primary" id="interface_add_modal_btn">新增</button>
             <button class="btn btn-danger" id="emp_delete_all_btn">删除</button>
         </div>
     </div>
     <!-- 显示表格数据 -->
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover" id="emps_table">
+            <table class="table table-hover" id="interface_table">
                 <thead>
                 <tr>
                     <th>
                         <input type="checkbox" id="check_all"/>
                     </th>
                     <th>#</th>
-                    <th>interfaceName</th>
-                    <th>interfaceUri</th>
-                    <th>latestUpdater</th>
-                    <th>updateDate</th>
+                    <th>接口名称</th>
+                    <th>请求方式</th>
+                    <th>请求路径</th>
+                    <th>更新者</th>
+                    <th>创建时间</th>
+                    <th>请求参数</th>
+                    <th>响应参数</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -185,13 +241,14 @@
 
     function to_page(pn){
         $.ajax({
-            url:"/emps",
+            url:"/interfaces",
             data:"pn="+pn,
             type:"GET",
             success:function(result){
+                console.log('进入接口信息页面');
                 //console.log(result);
                 //1、解析并显示员工数据
-                build_emps_table(result);
+                build_interfaces_table(result);
                 //2、解析并显示分页信息
                 build_page_info(result);
                 //3、解析显示分页条数据
@@ -200,17 +257,28 @@
         });
     }
 
-    function build_emps_table(result){
+    function build_interfaces_table(result){
         //清空table表格
-        $("#emps_table tbody").empty();
+        $("#interface_table tbody").empty();
         var emps = result.extend.pageInfo.list;
-        $.each(emps,function(index,item){
+        $.each(emps,function(index, item) {
+
             var checkBoxTd = $("<td><input type='checkbox' class='check_item'/></td>");
+            var interfaceIdTd = $("<td></td>").append(item.interfaceId);
+            var interfaceNameTd = $("<td></td>").append(item.interfaceName);
+            var requestMethodTd = $("<td></td>").append(item.requestMethod);
+            var requestPathTd = $("<td></td>").append(item.requestPath);
+            var latestUpdaterTd = $("<td></td>").append(item.latestUpdater);
+            var createTimeTd = $("<td></td>").append(item.createTime);
+            var requestParameterTd = $("<td></td>").append(item.requestParameter);
+            var responseParameterTd = $("<td></td>").append(item.responseParameter);
+
+            /*var checkBoxTd = $("<td><input type='checkbox' class='check_item'/></td>");
             var empIdTd = $("<td></td>").append(item.empId);
             var empNameTd = $("<td></td>").append(item.empName);
             var genderTd = $("<td></td>").append(item.gender=='M'?"男":"女");
-            var emailTd = $("<td></td>").append(item.email);
-            var deptNameTd = $("<td></td>").append(item.department.deptName);
+            var emailTd = $("<td></td>").append(item.email);*/
+            //var deptNameTd = $("<td></td>").append(item.department.deptName);
             /**
              <button class="">
              <span class="" aria-hidden="true"></span>
@@ -220,22 +288,25 @@
             var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
             //为编辑按钮添加一个自定义的属性，来表示当前员工id
-            editBtn.attr("edit-id",item.empId);
+            editBtn.attr("edit-id", item.interfaceId);
             var delBtn =  $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
             //为删除按钮添加一个自定义的属性来表示当前删除的员工id
-            delBtn.attr("del-id",item.empId);
+            delBtn.attr("del-id", item.interfaceId);
             var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
             //var delBtn =
             //append方法执行完成以后还是返回原来的元素
             $("<tr></tr>").append(checkBoxTd)
-                .append(empIdTd)
-                .append(empNameTd)
-                .append(genderTd)
-                .append(emailTd)
-                .append(deptNameTd)
+                .append(interfaceIdTd)
+                .append(interfaceNameTd)
+                .append(requestMethodTd)
+                .append(requestPathTd)
+                .append(latestUpdaterTd)
+                .append(createTimeTd)
+                .append(requestParameterTd)
+                .append(responseParameterTd)
                 .append(btnTd)
-                .appendTo("#emps_table tbody");
+                .appendTo("#interface_table tbody");
         });
     }
     //解析显示分页信息
@@ -269,8 +340,6 @@
             });
         }
 
-
-
         var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
         var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
         if(result.extend.pageInfo.hasNextPage == false){
@@ -284,8 +353,6 @@
                 to_page(result.extend.pageInfo.pages);
             });
         }
-
-
 
         //添加首页和前一页 的提示
         ul.append(firstPageLi).append(prePageLi);
@@ -318,20 +385,20 @@
     }
 
     //点击新增按钮弹出模态框。
-    $("#emp_add_modal_btn").click(function(){
+    $("#interface_add_modal_btn").click(function(){
         //清除表单数据（表单完整重置（表单的数据，表单的样式））
-        reset_form("#empAddModal form");
+        reset_form("#interfaceAddModal form");
         //s$("")[0].reset();
         //发送ajax请求，查出部门信息，显示在下拉列表中
-        getDepts("#empAddModal select");
+        //getDepts("#interfaceAddModal select");
         //弹出模态框
-        $("#empAddModal").modal({
+        $("#interfaceAddModal").modal({
             backdrop:"static"
         });
     });
 
     //查出所有的部门信息并显示在下拉列表中
-    function getDepts(ele){
+    /*function getDepts(ele){
         //清空之前下拉列表的值
         $(ele).empty();
         $.ajax({
@@ -342,7 +409,7 @@
                 //"extend":{"depts":[{"deptId":1,"deptName":"开发部"},{"deptId":2,"deptName":"测试部"}]}}
                 //console.log(result);
                 //显示部门信息在下拉列表中
-                //$("#empAddModal select").append("")
+                //$("#interfaceAddModal select").append("")
                 $.each(result.extend.depts,function(){
                     var optionEle = $("<option></option>").append(this.deptName).attr("value",this.deptId);
                     optionEle.appendTo(ele);
@@ -350,7 +417,7 @@
             }
         });
 
-    }
+    }*/
 
     //校验表单数据
     function validate_add_form(){
@@ -431,13 +498,13 @@
         $.ajax({
             url:"/emp",
             type:"POST",
-            data:$("#empAddModal form").serialize(),
+            data:$("#interfaceAddModal form").serialize(),
             success:function(result){
                 //alert(result.msg);
                 if(result.code == 100){
                     //员工保存成功；
                     //1、关闭模态框
-                    $("#empAddModal").modal('hide');
+                    $("#interfaceAddModal").modal('hide');
 
                     //2、来到最后一页，显示刚才保存的数据
                     //发送ajax请求显示最后一页数据即可
@@ -467,54 +534,59 @@
 
 
         //1、查出部门信息，并显示部门列表
-        getDepts("#empUpdateModal select");
+        //getDepts("#interfaceUpdateModal select");
         //2、查出员工信息，显示员工信息
-        getEmp($(this).attr("edit-id"));
+        getInterface($(this).attr("edit-id"));
 
         //3、把员工的id传递给模态框的更新按钮
-        $("#emp_update_btn").attr("edit-id",$(this).attr("edit-id"));
-        $("#empUpdateModal").modal({
+        $("#interface_update_btn").attr("edit-id",$(this).attr("edit-id"));
+        $("#interfaceUpdateModal").modal({
             backdrop:"static"
         });
     });
 
-    function getEmp(id){
+    // 根据id查询接口信息(调试完成)
+    function getInterface(id){
         $.ajax({
-            url:"/emp/"+id,
+            url:"/interface/"+id,
             type:"GET",
             success:function(result){
-                //console.log(result);
-                var empData = result.extend.emp;
-                $("#empName_update_static").text(empData.empName);
-                $("#email_update_input").val(empData.email);
-                $("#empUpdateModal input[name=gender]").val([empData.gender]);
-                $("#empUpdateModal select").val([empData.dId]);
+                var interfaceData = result.extend.interface;
+                $("#interfaceName_update_input").val(interfaceData.interfaceName);
+                $("#requestMethod_update_input").val(interfaceData.requestMethod);
+                $("#requestPath_update_input").val(interfaceData.requestPath);
+                $("#latestUpdater_update_input").val(interfaceData.latestUpdater);
+                $("#createTime_update_input").val(interfaceData.createTime);
+                $("#requestParameter_update_input").val(interfaceData.requestParameter);
+                $("#responseParameter_update_input").val(interfaceData.responseParameter);
             }
         });
     }
 
-    //点击更新，更新员工信息
-    $("#emp_update_btn").click(function(){
+    //点击更新，更新接口信息
+    $("#interface_update_btn").click(function(){
         //验证邮箱是否合法
         //1、校验邮箱信息
-        var email = $("#email_update_input").val();
+        /*var email = $("#requestMethod_update_input").val();
         var regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
         if(!regEmail.test(email)){
-            show_validate_msg("#email_update_input", "error", "邮箱格式不正确");
+            show_validate_msg("#requestMethod_update_input", "error", "邮箱格式不正确");
             return false;
         }else{
-            show_validate_msg("#email_update_input", "success", "");
-        }
+            show_validate_msg("#requestMethod_update_input", "success", "");
+        }*/
 
         //2、发送ajax请求保存更新的员工数据
         $.ajax({
-            url:"/emp/"+$(this).attr("edit-id"),
-            type:"PUT",
-            data:$("#empUpdateModal form").serialize(),
+            url:"${APP_PATH}/interface/"+$(this).attr("edit-id"),
+            type:"POST",
+            data:$("#interfaceUpdateModal form").serialize(),
+            dataType:'json',
             success:function(result){
+                console.log('进入更新...');
                 //alert(result.msg);
                 //1、关闭对话框
-                $("#empUpdateModal").modal("hide");
+                $("#interfaceUpdateModal").modal("hide");
                 //2、回到本页面
                 to_page(currentPage);
             }

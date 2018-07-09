@@ -40,18 +40,24 @@
             <table class="table table-hover">
                 <tr>
                     <th>#</th>
-                    <th>interfaceName</th>
-                    <th>interfaceUri</th>
-                    <th>latestUpdater</th>
-                    <th>updateDate</th>
-                    <th>操作</th>
+                    <th>接口名称</th>
+                    <th>请求方式</th>
+                    <th>请求路径</th>
+                    <th>更新者</th>
+                    <th>创建时间</th>
+                    <th>请求参数</th>
+                    <th>响应参数</th>
                 </tr>
                 <c:forEach items="${pageInfo.list}" var="interface">
                     <tr>
                         <th>${interface.interfaceId }</th>
                         <th>${interface.interfaceName }</th>
+                        <th>${interface.requestMethod }</th>
+                        <th>${interface.requestPath }</th>
                         <th>${interface.latestUpdater }</th>
-                        <th>${interface.updateDate }</th>
+                        <th>${interface.createTime }</th>
+                        <th>${interface.requestParameter }</th>
+                        <th>${interface.responseParameter }</th>
                         <%--<th>${interface.department.deptName }</th>--%>
                         <th>
                             <button class="btn btn-primary btn-sm">
@@ -79,9 +85,9 @@
         <div class="col-md-6">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    <li><a href="${APP_PATH }/emps?pn=1">首页</a></li>
+                    <li><a href="/emps?pn=1">首页</a></li>
                     <c:if test="${pageInfo.hasPreviousPage }">
-                        <li><a href="${APP_PATH }/emps?pn=${pageInfo.pageNum-1}"
+                        <li><a href="/emps?pn=${pageInfo.pageNum-1}"
                                aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
                         </a></li>
                     </c:if>
@@ -92,16 +98,16 @@
                             <li class="active"><a href="#">${page_Num }</a></li>
                         </c:if>
                         <c:if test="${page_Num != pageInfo.pageNum }">
-                            <li><a href="${APP_PATH }/emps?pn=${page_Num }">${page_Num }</a></li>
+                            <li><a href="/emps?pn=${page_Num }">${page_Num }</a></li>
                         </c:if>
 
                     </c:forEach>
                     <c:if test="${pageInfo.hasNextPage }">
-                        <li><a href="${APP_PATH }/emps?pn=${pageInfo.pageNum+1 }"
+                        <li><a href="/emps?pn=${pageInfo.pageNum+1 }"
                                aria-label="Next"> <span aria-hidden="true">&raquo;</span>
                         </a></li>
                     </c:if>
-                    <li><a href="${APP_PATH }/emps?pn=${pageInfo.pages}">末页</a></li>
+                    <li><a href="/emps?pn=${pageInfo.pages}">末页</a></li>
                 </ul>
             </nav>
         </div>

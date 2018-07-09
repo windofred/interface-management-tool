@@ -6,17 +6,48 @@
     <resultMap id="interfaceResultMap" type="com.migu.spms.entity.InterfaceDO">
         <id column="interface_id" property="interfaceId" />
         <result column="interface_name" property="interfaceName" />
-        <result column="interface_uri" property="interfaceUri" />
+        <result column="request_method" property="requestMethod" />
+        <result column="request_path" property="requestPath" />
         <result column="latest_updater" property="latestUpdater" />
-        <result column="update_date" property="updateDate" />
+        <result column="create_time" property="createTime" />
+        <result column="request_parameter" property="requestParameter" />
+        <result column="response_parameter" property="responseParameter" />
     </resultMap>
-    
-    <select id="selectById" resultMap="interfaceResultMap">
-        SELECT * FROM spms_interface WHERE interface_id=#{interfaceId}
+
+    <!--根据id查询-->
+    <select id="selectById" parameterType="int" resultMap="interfaceResultMap">
+        SELECT * FROM spms_interface
+        WHERE interface_id=#{interfaceId}
     </select>
 
+    <!--查询所有接口信息-->
     <select id="getAll" resultMap="interfaceResultMap">
         SELECT * FROM spms_interface
     </select>
+
+    <!--根据id删除接口-->
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM spms_interface
+        WHERE interface_id=#{interfaceId}
+    </delete>
+
+    <!--插入接口-->
+    <insert id="insertInterface" parameterType="com.migu.spms.entity.InterfaceDO">
+        INSERT INTO spms_interface(interface_name, request_method, request_path, latest_updater, create_time, request_parameter, response_parameter)
+        VALUES(#{interfaceName}, #{requestMethod}, #{requestPath}, #{latestUpdater}, #{createTime}, #{requestParameter}, #{responseParameter})
+    </insert>
+    
+    <!--更新接口-->
+    <update id="updateById" parameterType="com.migu.spms.entity.InterfaceDO">
+        UPDATE spms_interface
+        SET interface_name=#{interfaceName},
+        request_method=#{requestMethod},
+        request_path=#{requestPath},
+        latest_updater=#{latestUpdater},
+        create_time=#{createTime},
+        request_Parameter=#{requestParameter},
+        response_Parameter=#{responseParameter}
+        WHERE interface_id=#{interfaceId}
+    </update>
 
 </mapper>
