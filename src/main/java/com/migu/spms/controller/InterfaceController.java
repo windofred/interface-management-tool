@@ -27,6 +27,41 @@ public class InterfaceController {
     @Resource
     private InterfaceService interfaceService;
 
+    /**
+     * 根据id查询接口
+     * @param id
+     * @return
+     */
+    @RequestMapping(value="/interface/{id}", method=RequestMethod.GET)
+    @ResponseBody
+    public Msg getInterface(@PathVariable("id") Integer id) {
+        InterfaceDO interfaceDO = interfaceService.selectById(id);
+        return Msg.success().add("interface", interfaceDO);
+    }
+
+    /**
+     * 查询所有接口信息
+     * @return
+     */
+    @RequestMapping(value="/interfaces", method = RequestMethod.GET)
+    @ResponseBody
+    public Msg getInterfaces() {
+        List<InterfaceDO> interfaceList = interfaceService.getAll();
+        return Msg.success().add("interfaces", interfaceList);
+    }
+
+    /**
+     * 添加接口
+     * @param interfaceDO
+     * @return
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg addInterfaces(InterfaceDO interfaceDO) {
+        int insertInterface = interfaceService.insertInterface(interfaceDO);
+        return Msg.success();
+    }
+
     @ResponseBody
     @RequestMapping(value="/interface/{interfaceId}",method=RequestMethod.POST)
     public Msg saveInterface(InterfaceDO interfaceDO, HttpServletRequest request){
@@ -64,17 +99,7 @@ public class InterfaceController {
         return Msg.success();
     }*/
 
-    /**
-     * 根据id查询接口
-     * @param id
-     * @return
-     */
-    @RequestMapping(value="/interface/{id}", method=RequestMethod.GET)
-    @ResponseBody
-    public Msg getEmp(@PathVariable("id") Integer id) {
-        InterfaceDO interfaceDO = interfaceService.selectById(id);
-        return Msg.success().add("interface", interfaceDO);
-    }
+
 
     /**
      * 接口保存
