@@ -13,14 +13,14 @@ import java.util.List;
  */
 public interface InterfaceService {
 
-    List<InterfaceDO> getAll();
+    void saveInterface(InterfaceDO interfaceDO);
 
-    InterfaceDO selectById(Integer interfaceId);
+    boolean updateInterface(InterfaceDO interfaceDO);
 
-    int deleteById(Integer interfaceId);
+    boolean deleteInterface(Integer interfaceId);
 
-    int insertInterface(InterfaceDO record);
+    InterfaceDO findInterfaceById(Integer interfaceId);
 
-    int updateById(InterfaceDO interfaceDO);
+    List<InterfaceDO> findAll();
 
 }

@@ -15,30 +15,32 @@
     </resultMap>
 
     <!--根据id查询-->
-    <select id="selectById" parameterType="int" resultMap="interfaceResultMap">
-        SELECT * FROM spms_interface
+    <select id="findInterfaceById" parameterType="int" resultMap="interfaceResultMap">
+        SELECT interface_id,interface_name,request_method,request_path,latest_updater,create_time,request_parameter,response_parameter
+        FROM spms_interface
         WHERE interface_id=#{interfaceId}
     </select>
 
     <!--查询所有接口信息-->
-    <select id="getAll" resultMap="interfaceResultMap">
-        SELECT * FROM spms_interface
+    <select id="findAll" resultMap="interfaceResultMap">
+        SELECT interface_id,interface_name,request_method,request_path,latest_updater,create_time,request_parameter,response_parameter
+        FROM spms_interface
     </select>
 
     <!--根据id删除接口-->
-    <delete id="deleteById" parameterType="int">
+    <delete id="deleteInterface" parameterType="int">
         DELETE FROM spms_interface
         WHERE interface_id=#{interfaceId}
     </delete>
 
     <!--插入接口-->
-    <insert id="insertInterface" parameterType="com.migu.spms.entity.InterfaceDO">
+    <insert id="saveInterface" parameterType="com.migu.spms.entity.InterfaceDO">
         INSERT INTO spms_interface(interface_name, request_method, request_path, latest_updater, create_time, request_parameter, response_parameter)
         VALUES(#{interfaceName}, #{requestMethod}, #{requestPath}, #{latestUpdater}, #{createTime}, #{requestParameter}, #{responseParameter})
     </insert>
     
     <!--更新接口-->
-    <update id="updateById" parameterType="com.migu.spms.entity.InterfaceDO">
+    <update id="updateInterface" parameterType="com.migu.spms.entity.InterfaceDO">
         UPDATE spms_interface
         SET interface_name=#{interfaceName},
         request_method=#{requestMethod},

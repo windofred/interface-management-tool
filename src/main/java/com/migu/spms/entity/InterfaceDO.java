@@ -13,7 +13,7 @@ public class InterfaceDO implements Serializable {
     private String requestMethod;
     private String requestPath;
     private String latestUpdater;
-    private Date createTime;
+    private String createTime;
     private String requestParameter;
     private String responseParameter;
 
@@ -57,11 +57,11 @@ public class InterfaceDO implements Serializable {
         this.latestUpdater = latestUpdater;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -87,8 +87,9 @@ public class InterfaceDO implements Serializable {
                 "interfaceId=" + interfaceId +
                 ", interfaceName='" + interfaceName + '\'' +
                 ", requestMethod='" + requestMethod + '\'' +
+                ", requestPath='" + requestPath + '\'' +
                 ", latestUpdater='" + latestUpdater + '\'' +
-                ", createTime=" + createTime +
+                ", createTime='" + createTime + '\'' +
                 ", requestParameter='" + requestParameter + '\'' +
                 ", responseParameter='" + responseParameter + '\'' +
                 '}';

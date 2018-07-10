@@ -11,34 +11,64 @@ import java.util.List;
 
 @Service("interfaceService")
 @Transactional
+/**
+ *
+ */
 public class InterfaceServiceImpl implements InterfaceService {
 
+    /**
+     * 注入InterfaceMapper接口
+     */
     @Autowired
     private InterfaceMapper interfaceMapper;
 
-    public List<InterfaceDO> getAll() {
-        List<InterfaceDO> list = interfaceMapper.getAll();
-        return list;
+    /**
+     * 新增接口
+     * @param interfaceDO
+     */
+    @Override
+    public void saveInterface(InterfaceDO interfaceDO) {
+        interfaceMapper.saveInterface(interfaceDO);
     }
 
-    public InterfaceDO selectById(Integer interfaceId) {
-        InterfaceDO interfaceDO = interfaceMapper.selectById(interfaceId);
+    /**
+     * 更新接口
+     * @param interfaceDO
+     * @return
+     */
+    @Override
+    public boolean updateInterface(InterfaceDO interfaceDO) {
+        return interfaceMapper.updateInterface(interfaceDO);
+    }
+
+    /**
+     * 根据Id删除接口
+     * @param interfaceId
+     * @return
+     */
+    @Override
+    public boolean deleteInterface(Integer interfaceId) {
+        return interfaceMapper.deleteInterface(interfaceId);
+    }
+
+    /**
+     * 根据id查找接口
+     * @param interfaceId
+     * @return
+     */
+    @Override
+    public InterfaceDO findInterfaceById(Integer interfaceId) {
+        InterfaceDO interfaceDO = interfaceMapper.findInterfaceById(interfaceId);
         return interfaceDO;
     }
 
-    public int deleteById(Integer interfaceId) {
-        int deleteById = interfaceMapper.deleteById(interfaceId);
-        return deleteById;
+    /**
+     * 查询所有接口
+     * @return
+     */
+    @Override
+    public List<InterfaceDO> findAll() {
+        List<InterfaceDO> allInterface = interfaceMapper.findAll();
+        return allInterface;
     }
-
-    public int insertInterface(InterfaceDO interfaceDO) {
-        int insertInterface = interfaceMapper.insertInterface(interfaceDO);
-        return insertInterface;
-    }
-
-    public int updateById(InterfaceDO interfaceDO) {
-        int updateById = interfaceMapper.updateById(interfaceDO);
-        return updateById;
-    }
-
 }
