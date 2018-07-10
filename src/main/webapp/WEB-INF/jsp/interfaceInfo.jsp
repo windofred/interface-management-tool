@@ -8,6 +8,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
+
 <%
     pageContext.setAttribute("path", request.getContextPath());
 %>
@@ -15,14 +16,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>用户列表</title>
-    <link
-            href="${path}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"
-            rel="stylesheet">
-    <script type="text/javascript"
-            src="${path}/static/bootstrap-3.3.7-dist/js/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript"
-            src="${path}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <title>接口列表</title>
+    <link href="${path}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="${path}/static/bootstrap-3.3.7-dist/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="${path}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>

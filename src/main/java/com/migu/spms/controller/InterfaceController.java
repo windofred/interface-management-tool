@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.migu.spms.entity.InterfaceDO;
 import com.migu.spms.service.InterfaceService;
+import com.migu.spms.util.Msg;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by sala on 2018/7/8.
+ * 描述：接口Controller<BR>
+ * 创建人：<BR>
+ * 时间：2018年7月10日
  */
 @Controller
 public class InterfaceController {
@@ -25,7 +28,7 @@ public class InterfaceController {
         return "addInterface";
     }
 
-    @RequestMapping("/addInterface")
+    @RequestMapping(value = "/addInterface", method = RequestMethod.POST)
     public String addInterface(Model model, InterfaceDO interfaceDO) {
         if (interfaceDO != null) {
             interfaceService.saveInterface(interfaceDO);
@@ -33,7 +36,7 @@ public class InterfaceController {
         return "redirect:/interfaceInfo";
     }
 
-    @RequestMapping("/updateInterface")
+    @RequestMapping(value = "/updateInterface", method = RequestMethod.POST)
     public String updateUser(Model model, InterfaceDO interfaceDO) {
         if (interfaceService.updateInterface(interfaceDO)) {
             interfaceDO = interfaceService.findInterfaceById(interfaceDO.getInterfaceId());
@@ -43,20 +46,20 @@ public class InterfaceController {
         return "error";
     }
 
-    @RequestMapping("/getAllInterface")
+    @RequestMapping(value = "/getAllInterface", method = RequestMethod.GET)
     public String getAllInterface(Model model) {
         List<InterfaceDO> interfaceList = interfaceService.findAll();
         model.addAttribute("interfaceList", interfaceList);
         return "interfaceInfo";
     }
 
-    @RequestMapping("/getInterface")
+    @RequestMapping(value = "/getInterface", method = RequestMethod.GET)
     public String getInterface(int id, Model model) {
         model.addAttribute("interfaceDO", interfaceService.findInterfaceById(id));
         return "editInterface";
     }
 
-    @RequestMapping("/deleteInterface")
+    @RequestMapping(value = "/deleteInterface", method = RequestMethod.POST)
     public String deleteInterface(int id, Model model) {
         model.addAttribute("interface", interfaceService.deleteInterface(id));
         return "redirect:interfaceInfo";
@@ -71,7 +74,5 @@ public class InterfaceController {
         model.addAttribute("pageInfo", page);
         return "interfaceInfo";
     }
-
-
 
 }

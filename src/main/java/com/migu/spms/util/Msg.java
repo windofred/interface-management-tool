@@ -13,27 +13,27 @@ public class Msg {
 	//状态码   100-成功    200-失败
 	private int code;
 	//提示信息
-	private String msg;
+	private String remark;
 	
 	//用户要返回给浏览器的数据
-	private Map<String, Object> extend = new HashMap<String, Object>();
+	private Map<String, Object> result = new HashMap<String, Object>();
 
 	public static Msg success(){
 		Msg result = new Msg();
 		result.setCode(100);
-		result.setMsg("处理成功！");
+		result.setRemark("处理成功！");
 		return result;
 	}
 	
 	public static Msg fail(){
 		Msg result = new Msg();
 		result.setCode(200);
-		result.setMsg("处理失败！");
+		result.setRemark("处理失败！");
 		return result;
 	}
 	
 	public Msg add(String key,Object value){
-		this.getExtend().put(key, value);
+		this.getResult().put(key, value);
 		return this;
 	}
 	
@@ -45,21 +45,19 @@ public class Msg {
 		this.code = code;
 	}
 
-	public String getMsg() {
-		return msg;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
-	public Map<String, Object> getExtend() {
-		return extend;
+	public Map<String, Object> getResult() {
+		return result;
 	}
 
-	public void setExtend(Map<String, Object> extend) {
-		this.extend = extend;
+	public void setResult(Map<String, Object> result) {
+		this.result = result;
 	}
-	
-	
 }

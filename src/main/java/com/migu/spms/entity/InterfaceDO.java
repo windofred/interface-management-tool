@@ -1,20 +1,42 @@
 package com.migu.spms.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by sala on 2018/7/8.
  */
 public class InterfaceDO implements Serializable {
-
+    /**
+     * 接口Id
+     */
     private Integer interfaceId;
+    /**
+     * 接口名称
+     */
     private String interfaceName;
+    /**
+     * 请求方式
+     */
     private String requestMethod;
+    /**
+     * 请求路径
+     */
     private String requestPath;
+    /**
+     * 最近更新者
+     */
     private String latestUpdater;
+    /**
+     * 创建时间
+     */
     private String createTime;
+    /**
+     * 请求参数
+     */
     private String requestParameter;
+    /**
+     * 响应参数
+     */
     private String responseParameter;
 
     public String getRequestPath() {
@@ -81,17 +103,4 @@ public class InterfaceDO implements Serializable {
         this.responseParameter = responseParameter;
     }
 
-    @Override
-    public String toString() {
-        return "InterfaceDO{" +
-                "interfaceId=" + interfaceId +
-                ", interfaceName='" + interfaceName + '\'' +
-                ", requestMethod='" + requestMethod + '\'' +
-                ", requestPath='" + requestPath + '\'' +
-                ", latestUpdater='" + latestUpdater + '\'' +
-                ", createTime='" + createTime + '\'' +
-                ", requestParameter='" + requestParameter + '\'' +
-                ", responseParameter='" + responseParameter + '\'' +
-                '}';
-    }
 }

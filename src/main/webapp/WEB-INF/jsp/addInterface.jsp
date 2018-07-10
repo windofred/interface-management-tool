@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1>添加接口</h1>
-<form action="" name="userForm">
+<form action="" name="userForm" method="post">
     接口名称：<input type="text" name="interfaceName"><br>
     请求方式：<input type="text" name="requestMethod"><br>
     请求路径：<input type="text" name="requestPath"><br>
