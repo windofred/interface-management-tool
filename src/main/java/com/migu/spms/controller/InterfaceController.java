@@ -30,7 +30,7 @@ public class InterfaceController {
 
     @RequestMapping(value = "/addInterface", method = RequestMethod.POST)
     public String addInterface(Model model, InterfaceDO interfaceDO) {
-        System.out.println();
+        System.out.println("hello china...");
         if (interfaceDO != null) {
             interfaceService.saveInterface(interfaceDO);
         }
