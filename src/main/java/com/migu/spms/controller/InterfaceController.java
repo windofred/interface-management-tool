@@ -33,6 +33,8 @@ public class InterfaceController {
         System.out.println("hello");
         System.out.println("hello spms");
         System.out.println("hahahahha");
+        // 自己写的输出语句
+        System.out.println("heheheheh");
         if (interfaceDO != null) {
             interfaceService.saveInterface(interfaceDO);
         }
